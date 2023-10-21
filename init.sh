@@ -37,8 +37,8 @@ brew install ansible
 
 mkdir -p personal && cd personal
 
-git clone git@github.com:JMiocevich/ansible.git
+git clone https://github.com/JMiocevich/ansible.git
 
-cd ansible
+cd ansible  
 
 ansible-playbook playbook.yml 

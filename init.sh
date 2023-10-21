@@ -13,6 +13,18 @@ fi
 # fi
 
 # Install Homebrew
+
+# Check for Xcode CLT and install if necessary
+if ! xcode-select -p &>/dev/null; then
+    echo "Installing Xcode Command Line Tools..."
+    xcode-select --install &>/dev/null
+
+    # Wait until the Xcode CLT is installed
+    until xcode-select -p &>/dev/null; do
+        sleep 5
+    done
+fi
+
 echo "Installing Homebrew..."
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" </dev/null
 

@@ -1,30 +1,26 @@
 #!/bin/bash
 
-if [[ $EUID -ne 0 ]]; then
-    echo "Need sudo access. Rerunning script with sudo..."
-    sudo "$0" "$@"
-    exit $?
+# Check if the script is being run as root
+if [ "$EUID" -eq 0 ]; then
+    echo "Do not run this script as root."
+    exit 1
 fi
 
-# Check if Homebrew is installed, if not, install it
-if ! command -v brew &>/dev/null; then
-    echo "Homebrew not found. Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-else
+# Check if Homebrew is already installed
+if command -v brew > /dev/null 2>&1; then
     echo "Homebrew is already installed."
+    exit 0
 fi
 
-# Update Homebrew recipes
-brew update
+# Install Homebrew
+echo "Installing Homebrew..."
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" </dev/null
 
-# Install Ansible
-echo "Installing Ansible..."
-brew install ansible
-
-# Verify installation
-if command -v ansible &>/dev/null; then
-    echo "Ansible successfully installed!"
-    ansible --version
-else
-    echo "Something went wrong with Ansible installation. Please check the installation logs."
+# Add Homebrew to PATH, if it's not already in there
+if [[ ! "$PATH" =~ (^|:)/usr/local/bin(:|$) ]]; then
+    echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.zshrc
+    source ~/.zshrc
 fi
+
+echo "Homebrew installation complete."
+

@@ -17,8 +17,6 @@ if ! command -v brew &>/dev/null; then
 
 
   if ! grep -qs "recommended by brew doctor" ~/.zshrc; then
-    echo "Put Homebrew location earlier in PATH ..."
-      echo '\n# recommended by brew doctor\n' >> ~/.zshrc
       echo 'export PATH="/usr/local/bin:$PATH"\n' >> ~/.zshrc
       export PATH="/usr/local/bin:$PATH"
   fi
@@ -29,7 +27,7 @@ fi
 # Homebrew OSX libraries
 
 echo "Updating brew formulas"
-  	brew update
+brew update
 brew install ansible
 
 
@@ -42,4 +40,3 @@ cd ansible
 
 ansible-playbook playbook.yml
 
-curl -L https://raw.github.com/Jmiocevich/ansible/install.sh | sh

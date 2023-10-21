@@ -1,5 +1,11 @@
 #!/bin/bash
 
+if [[ $EUID -ne 0 ]]; then
+    echo "Need sudo access. Rerunning script with sudo..."
+    sudo "$0" "$@"
+    exit $?
+fi
+
 # Check if Homebrew is installed, if not, install it
 if ! command -v brew &>/dev/null; then
     echo "Homebrew not found. Installing Homebrew..."

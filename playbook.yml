@@ -18,12 +18,6 @@
     #   - virtualenv
     upgrade_homebrew_packages: true
 
-  pre_tasks:
-    - name: Ensuring Homebrew Is Installed
-      stat:
-        path: /usr/local/bin/brew
-      register: homebrew_check
-
   tasks:
     - name: Updating Homebrew
       homebrew:

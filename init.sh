@@ -17,8 +17,9 @@ fi
 
 pip3 install ansible
 
-echo "export PATH=\"$(pip3 show ansible | grep Location | awk -F' ' '{print $2 "/bin"}'):\$PATH\"" >> ~/.zshrc
+echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
+
 
 
 

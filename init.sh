@@ -2,15 +2,15 @@
 
 
 # # Check for Xcode CLT and install if necessary
-# if ! xcode-select -p &>/dev/null; then
-#     echo "Installing Xcode Command Line Tools..."
-#     xcode-select --install &>/dev/null
+if ! xcode-select -p &>/dev/null; then
+    echo "Installing Xcode Command Line Tools..."
+    xcode-select --install &>/dev/null
 
-#     # Wait until the Xcode CLT is installed
-#     until xcode-select -p &>/dev/null; do
-#         sleep 5
-#     done
-# fi
+    # Wait until the Xcode CLT is installed
+    until xcode-select -p &>/dev/null; do
+        sleep 5
+    done
+fi
 
 
 

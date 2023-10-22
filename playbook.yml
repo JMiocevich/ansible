@@ -49,10 +49,11 @@
       # when: brew_check.rc == 0
 
     - name: Source Homebrew shellenv for current session
-      command: eval "$(/opt/homebrew/bin/brew shellenv)"
+      shell: eval "$(/opt/homebrew/bin/brew shellenv)"
       become: no
       delegate_to: localhost
-      # when: brew_check.rc == 0
+      when: brew_check.rc == 0
+
 
     - name: Update Homebrew
       command: brew update

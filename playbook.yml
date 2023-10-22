@@ -15,26 +15,6 @@
 
     upgrade_homebrew_packages: true
   tasks:
-
-    - name: Check if Xcode CLT is installed
-      command: xcode-select -p
-      register: xcode_check
-      failed_when: false
-      changed_when: false
-
-    - name: Install Xcode CLT
-      command: xcode-select --install
-      when: xcode_check.rc != 0
-      register: xcode_installation_started
-
-    - name: Wait for Xcode CLT to be installed
-      command: xcode-select -p
-      register: wait_for_xcode
-      until: wait_for_xcode.rc == 0
-      retries: 12  # retries command every 5 seconds for up to 1 minute
-      delay: 5
-      when: xcode_installation_started.changed
-
     - name: Check if Homebrew is installed
       command: which brew
       register: brew_check

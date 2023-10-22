@@ -30,4 +30,4 @@ git clone https://github.com/JMiocevich/ansible.git
 
 cd ansible  
 
-ansible-playbook playbook.yml 
+ansible-playbook playbook.yml --ask-become-pass

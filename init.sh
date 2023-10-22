@@ -17,7 +17,7 @@ fi
 
 pip3 install ansible
 
-echo 'export PATH="/usr/local/bin:$PATH"' >> ~/.zshrc
+echo 'export PATH="/Users/joe/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 
 

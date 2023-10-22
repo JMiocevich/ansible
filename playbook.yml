@@ -48,31 +48,48 @@
       delegate_to: localhost
       when: brew_check.rc == 0
 
-    - name: Source Homebrew shellenv for current session
-      shell: eval "$(/opt/homebrew/bin/brew shellenv)"
+    - name: Get Homebrew shellenv
+      shell: /opt/homebrew/bin/brew shellenv
+      register: homebrew_shellenv
       become: no
       delegate_to: localhost
       when: brew_check.rc == 0
 
+    - name: Extract PATH from Homebrew shellenv
+      set_fact:
+        homebrew_path: "{{ item.split('=')[1]|replace('\"', '') }}"
+      when: "'PATH' in item"
+      with_items: "{{ homebrew_shellenv.stdout_lines }}"
+
+
+
 
     - name: Update Homebrew
       command: brew update
+      environment:
+        PATH: "{{ homebrew_path }}:{{ ansible_env.PATH }}"
       when: upgrade_homebrew_packages
 
     - name: Upgrade Homebrew packages
       command: brew upgrade
+      environment:
+        PATH: "{{ homebrew_path }}:{{ ansible_env.PATH }}"
       when: upgrade_homebrew_packages
 
     - name: "Installing Homebrew Casks"
       homebrew_cask:
         name: "{{ item }}"
         state: present
+      environment:
+        PATH: "{{ homebrew_path }}:{{ ansible_env.PATH }}"
       loop: "{{ brew_cask_packages }}"
 
     - name: "Installing Homebrew packages"
       homebrew:
         name: "{{ item }}"
         state: present
+      environment:
+        PATH: "{{ homebrew_path }}:{{ ansible_env.PATH }}"
       loop: "{{ brew_packages }}"
 
 

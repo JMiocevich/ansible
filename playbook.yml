@@ -43,6 +43,7 @@
         path: "/Users/{{ ansible_user_id }}/.zprofile"
         line: 'eval "$(/opt/homebrew/bin/brew shellenv)"'
         insertafter: EOF
+        create: yes
       become: no
       delegate_to: localhost
       # when: brew_check.rc == 0

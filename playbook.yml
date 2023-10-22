@@ -30,7 +30,6 @@
 
     - name: Execute Homebrew installation script
       command: /tmp/homebrew_install.sh
-      become: yes
       when: brew_check.rc != 0
 
     - name: Remove temporary Homebrew installation script

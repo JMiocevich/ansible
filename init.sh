@@ -35,7 +35,7 @@ echo "Homebrew installation complete."
 
 brew install ansible 
 
-mkdir -p personal && cd personal
+mkdir -p $HOME/personal && cd $HOME/personal
 
 git clone https://github.com/JMiocevich/ansible.git
 

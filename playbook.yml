@@ -38,6 +38,20 @@
         state: absent
       when: brew_check.rc != 0
 
+    - name: Add Homebrew shellenv to .zprofile
+      lineinfile:
+        path: "/Users/{{ ansible_user_id }}/.zprofile"
+        line: 'eval "$(/opt/homebrew/bin/brew shellenv)"'
+        insertafter: EOF
+      become: no
+      delegate_to: localhost
+      when: brew_check.rc == 0
+
+    - name: Source Homebrew shellenv for current session
+      command: eval "$(/opt/homebrew/bin/brew shellenv)"
+      become: no
+      delegate_to: localhost
+      when: brew_check.rc == 0
 
     - name: Update Homebrew
       command: brew update

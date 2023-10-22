@@ -1,100 +1,50 @@
-
-- name: Install MacOS Packages
-  hosts: localhost
-  become: false
+- hosts: localhost
+  name: Macbook Playbook
+  gather_facts: False
   vars:
-    brew_cask_packages:
-      - orbstack
-      - iterm2
-    brew_packages:
-      - tmux
-      - aws-sam-cli
-      - neovim
-      - go
-      - node
-
-    upgrade_homebrew_packages: true
+    env: dev
+    TFENV_ARCH: amd64
   tasks:
-    - name: Check if Homebrew is installed
-      command: which brew
-      register: brew_check
-      failed_when: false
-      changed_when: false
-
-    - name: Download Homebrew installation script
-      get_url:
-        url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
-        dest: /tmp/homebrew_install.sh
-        mode: '0755'
-      when: brew_check.rc != 0
-
-    - name: Execute Homebrew installation script
-      command: /tmp/homebrew_install.sh
-      when: brew_check.rc != 0
-
-    - name: Remove temporary Homebrew installation script
-      file:
-        path: /tmp/homebrew_install.sh
-        state: absent
-      when: brew_check.rc != 0
-
-    - name: Add Homebrew shellenv to .zprofile
-      lineinfile:
-        path: "/Users/{{ ansible_user_id }}/.zprofile"
-        line: 'eval "$(/opt/homebrew/bin/brew shellenv)"'
-        insertafter: EOF
-        create: yes
-      become: no
-      delegate_to: localhost
-      when: brew_check.rc == 0
-
-    - name: Get Homebrew shellenv
-      shell: /opt/homebrew/bin/brew shellenv
-      register: homebrew_shellenv
-      become: no
-      delegate_to: localhost
-      when: brew_check.rc == 0
-
-    - name: Extract PATH from Homebrew shellenv
-      set_fact:
-        homebrew_path: "{{ item.split('=')[1]|replace('\"', '') }}"
-      when: "'PATH' in item"
-      with_items: "{{ homebrew_shellenv.stdout_lines }}"
-
-
-
-
-    - name: Update Homebrew
-      command: brew update
-      environment:
-        PATH: "{{ homebrew_path }}:{{ ansible_env.PATH }}"
-      when: upgrade_homebrew_packages
-
-    - name: Upgrade Homebrew packages
-      command: brew upgrade
-      environment:
-        PATH: "{{ homebrew_path }}:{{ ansible_env.PATH }}"
-      when: upgrade_homebrew_packages
-
-    - name: "Installing Homebrew Casks"
-      homebrew_cask:
+    - name: Ensures taps are present via homebrew
+      community.general.homebrew_tap:
         name: "{{ item }}"
         state: present
-      environment:
-        PATH: "{{ homebrew_path }}:{{ ansible_env.PATH }}"
-      loop: "{{ brew_cask_packages }}"
+      with_items:
+        - hashicorp/tap
 
-    - name: "Installing Homebrew packages"
-      homebrew:
+    - name: Ensures packages are present via homebrew cask
+      community.general.homebrew_cask:
         name: "{{ item }}"
         state: present
-      environment:
-        PATH: "{{ homebrew_path }}:{{ ansible_env.PATH }}"
-      loop: "{{ brew_packages }}"
+      with_items:
+        - orbstack
+
+    - name: Ensures packages are present via homebrew
+      community.general.homebrew:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - go
+      ignore_errors: yes
+      tags:
+        - packages
 
 
-
-    # - name: Include tasks from another file
-    #   include_tasks: tasks/test.yml
-
-
+    - name: Install linters and formatters with pip
+      ansible.builtin.pip:
+        name:
+          - flake8
+          - black
+          - yamllint
+          - git+https://github.com/Vimjas/vint@master
+        state: present
+        executable: pip3
+    
+    - name: Install linters and formatters with npm
+      loop:
+        - eslint_d
+        - prettier
+      community.general.npm:
+        name: "{{ item }}"
+        global: true
+        state: present

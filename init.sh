@@ -21,9 +21,6 @@ echo 'export PATH="/Users/joe/Library/Python/3.9/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
 
 
-
-
-
 mkdir -p $HOME/personal && cd $HOME/personal
 
 git clone https://github.com/JMiocevich/ansible.git

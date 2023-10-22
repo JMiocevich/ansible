@@ -26,17 +26,17 @@
         url: https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
         dest: /tmp/homebrew_install.sh
         mode: '0755'
-      # when: brew_check.rc != 0
+      when: brew_check.rc != 0
 
     - name: Execute Homebrew installation script
       command: /tmp/homebrew_install.sh
-      # when: brew_check.rc != 0
+      when: brew_check.rc != 0
 
     - name: Remove temporary Homebrew installation script
       file:
         path: /tmp/homebrew_install.sh
         state: absent
-      # when: brew_check.rc != 0
+      when: brew_check.rc != 0
 
     - name: Add Homebrew shellenv to .zprofile
       lineinfile:
@@ -46,7 +46,7 @@
         create: yes
       become: no
       delegate_to: localhost
-      # when: brew_check.rc == 0
+      when: brew_check.rc == 0
 
     - name: Source Homebrew shellenv for current session
       shell: eval "$(/opt/homebrew/bin/brew shellenv)"

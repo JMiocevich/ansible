@@ -1,3 +1,4 @@
+
 - name: Install MacOS Packages
   hosts: localhost
   become: false
@@ -6,16 +7,12 @@
       - orbstack
     brew_packages:
       - tmux
+      - aws-sam-cli
+      - neovim
+      - go
+      - node
 
-    install_homebrew_if_missing: false
-    # python_modules:
-    #   - configparser
-    #   - pylint
-    #   - virtualenv
     upgrade_homebrew_packages: false
-
-
-
   tasks:
     - name: Updating Homebrew
       homebrew:
@@ -40,9 +37,5 @@
         state: present
       register: result
       until: result is successful
-      
-    # - name: Installing Python Modules
-    #   pip:
-    #     name: "{{ item }}"
-    #     state: present
-    #   with_items: '{{ python_modules }}'
+
+

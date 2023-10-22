@@ -5,6 +5,7 @@
   vars:
     brew_cask_packages:
       - orbstack
+      - iterm2
     brew_packages:
       - tmux
       - aws-sam-cli
@@ -12,7 +13,7 @@
       - go
       - node
 
-    upgrade_homebrew_packages: false
+    upgrade_homebrew_packages: true
   tasks:
 
     - name: Check if Xcode CLT is installed
@@ -33,7 +34,7 @@
       retries: 12  # retries command every 5 seconds for up to 1 minute
       delay: 5
       when: xcode_installation_started.changed
-      
+
     - name: Check if Homebrew is installed
       command: which brew
       register: brew_check
@@ -45,15 +46,25 @@
       become: yes
       when: brew_check.rc != 0
 
-    - name: Installing Homebrew Cask Packages
-      homebrew_cask:
-        name: "{{ brew_cask_packages }}"
-        state: present
+    - name: Update Homebrew
+      command: brew update
+      when: upgrade_homebrew_packages
 
-    - name: Installing Homebrew Packages
-      homebrew:
-        name: "{{ brew_packages }}"
+    - name: Upgrade Homebrew packages
+      command: brew upgrade
+      when: upgrade_homebrew_packages
+
+    - name: "Installing Homebrew Casks"
+      homebrew_cask:
+        name: "{{ item }}"
         state: present
+      loop: "{{ brew_cask_packages }}"
+
+    - name: "Installing Homebrew packages"
+      homebrew:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ brew_packages }}"
 
 
 

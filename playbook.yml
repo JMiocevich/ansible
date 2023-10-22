@@ -18,6 +18,8 @@
         state: present
       with_items:
         - orbstack
+        - iterm2
+        - keepassx
 
     - name: Ensures packages are present via homebrew
       community.general.homebrew:
@@ -25,6 +27,11 @@
         state: present
       with_items:
         - go
+        - tmux
+        - python
+        - neovim
+        - awscli  
+        - aws-sam-cli
       ignore_errors: yes
       tags:
         - packages

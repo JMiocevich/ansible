@@ -20,6 +20,7 @@
         - orbstack
         - iterm2
         - keepassx
+        - slack
 
     - name: Ensures packages are present via homebrew
       community.general.homebrew:
@@ -32,6 +33,7 @@
         - neovim
         - awscli  
         - aws-sam-cli
+        - neovim
       ignore_errors: yes
       tags:
         - packages
@@ -43,7 +45,6 @@
           - flake8
           - black
           - yamllint
-          - git+https://github.com/Vimjas/vint@master
         state: present
         executable: pip3
     

@@ -1,4 +1,6 @@
 #!/bin/bash
+# prereq, homebrew needs to be installed
+
 brew install ansible
 
 mkdir -p $HOME/personal && cd $HOME/personal

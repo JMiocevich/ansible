@@ -26,6 +26,7 @@
         - iterm2
         - keepassx
         - slack
+        - spacelauncher
 
     - name: Ensures packages are present via homebrew
       community.general.homebrew:

@@ -1,1 +1,1 @@
-abc
+../../github/ansible/nvim/.config/nvim/test.txt

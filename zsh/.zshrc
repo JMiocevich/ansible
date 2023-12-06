@@ -5,6 +5,9 @@ export GPG_TTY=$(tty)
 export PATH="$HOME/.local/bin/pylsp:$PATH"
 export PATH="$PATH:/personal/ansible/"
 export PATH=$PATH:$(go env GOPATH)/bin
+export PATH="/opt/homebrew/bin:$PATH"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/icu4c/lib/pkgconfig"
+
 
 eval "$(github-copilot-cli alias -- "$0")"
 
@@ -147,6 +150,12 @@ alias setenv=". ./ci/scripts/set-verify-env.sh"
 alias update="brew update && brew upgrade"
 alias ghp="git add -A && git commit -m "commit"  && git push"
 alias f="~/personal/ansible/tmux-sessionizer"
+# alias python='python3'
+
+
+ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
+
+
 
 
 
@@ -161,3 +170,5 @@ alias f="~/personal/ansible/tmux-sessionizer"
 
 # setopt PROMPT_SUBST
 # export PROMPT='%F{grey}%n%f %F{cyan}%~%f %F{green}$(parse_git_branch)%f %F{normal}$%f '
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

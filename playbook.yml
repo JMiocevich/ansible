@@ -41,9 +41,10 @@
         - aws-sam-cli
         - neovim
         - stow
+        - powerlevel10k
       ignore_errors: yes
       tags:
-        - packages
+        - brew
 
     - name: Install linters and formatters with pip
       ansible.builtin.pip:

@@ -5,8 +5,8 @@ export GPG_TTY=$(tty)
 export PATH="$HOME/.local/bin/pylsp:$PATH"
 export PATH="$PATH:/personal/ansible/"
 export PATH=$PATH:$(go env GOPATH)/bin
-export PATH="/opt/homebrew/bin:$PATH"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/icu4c/lib/pkgconfig"
+# export PATH="/opt/homebrew/bin:$PATH"
+# export PKG_CONFIG_PATH="/opt/homebrew/opt/icu4c/lib/pkgconfig"
 
 
 eval "$(github-copilot-cli alias -- "$0")"
@@ -91,7 +91,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -118,7 +118,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
+# source /opt/homebrew/opt/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -153,7 +153,7 @@ alias f="~/personal/ansible/tmux-sessionizer"
 # alias python='python3'
 
 
-ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
+# ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
 
 
 
@@ -172,3 +172,4 @@ ln -s /opt/homebrew/bin/python3 /opt/homebrew/bin/python
 # export PROMPT='%F{grey}%n%f %F{cyan}%~%f %F{green}$(parse_git_branch)%f %F{normal}$%f '
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme

@@ -42,6 +42,7 @@
         - neovim
         - stow
         - powerlevel10k
+        - terraform
       ignore_errors: yes
       tags:
         - brew

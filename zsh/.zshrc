@@ -173,3 +173,7 @@ alias f="~/personal/ansible/tmux-sessionizer"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 #source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+#
+npm () {
+    bash -c "if grep -sq 'pnpm' package.json; then pnpm $@; else npm $@; fi"
+}

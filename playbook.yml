@@ -27,6 +27,7 @@
         - keepassx
         - slack
         - spacelauncher
+        - numi
 
     - name: Ensures packages are present via homebrew
       community.general.homebrew:

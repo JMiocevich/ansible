@@ -12,10 +12,11 @@
       with_items:
         - hashicorp/tap
 
-    # - name: Update and Upgrade homebrew
-    #   community.general.homebrew:
-    #     update_homebrew: true
-    #     upgrade_all: true
+    - name: Update and Upgrade homebrew
+      community.general.homebrew:
+        update_homebrew: true
+        upgrade_all: true
+      tags: update
 
     - name: Ensures packages are present via homebrew cask
       community.general.homebrew_cask:

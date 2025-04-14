@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+# session=$(find ~/github/ -type d -mindepth 1 -maxdepth 1 | fzf)
+
+# session_name=$(basename "$session" | tr . _)
+
+results=$(find ~/personal/ ~/work/ -type d -mindepth 1 -maxdepth 1 | awk -F/ '{print $NF " " $0}')
+
+# Use fzf to display only the base names
+selected_base=$(echo "$results" | awk '{print $1}' | fzf)
+
+# Retrieve the corresponding full path for the selected base name from the results
+selected_path=$(echo "$results" | awk -v base="$selected_base" '$1 == base {print $2}')
+
+if [ "$selected_path" ]; then
+    session="$selected_path"
+    session_name=$(basename "$session" | tr . _)
+else
+    echo "No selection made"
+    exit 1
+fi
+
+echo "$session"
+
+if ! tmux has-session -t "$session_name" > /dev/null; then 
+    tmux new-session -s "$session_name" -c  "$session" -d
+fi
+
+if [ -z "$TMUX" ]; then
+    # Not inside a tmux session, so attach to it
+    tmux attach-session -t "$session_name"
+else
+    # Inside a tmux session, switch to the target session
+    tmux switch-client -t "$session_name"
+fi

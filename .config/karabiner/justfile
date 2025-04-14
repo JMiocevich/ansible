@@ -1,0 +1,4 @@
+
+default:
+    pnpm i && pnpm build 
+    

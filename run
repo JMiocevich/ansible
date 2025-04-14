@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+script_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+filters=("$@") # Capture all arguments as an array
+dry="0"
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    if [[ "$1" == "--dry" ]]; then 
+        dry="1"
+    else 
+        filters=("$1")
+    fi
+    shift
+done
+
+# Logging function
+log() {
+    if [[ "$dry" == "1" ]]; then
+        echo "[DRY_RUN]: $@"
+    else
+        echo "$@"
+    fi
+}
+
+# Execute function
+execute() {
+    log "Executing: $@"
+    if [[ "$dry" == "1" ]]; then
+        return
+    fi
+    "$@"
+}
+
+log "Filters: ${filters[*]}"
+
+cd "$script_dir" || exit 1
+scripts=$(find ./runs -maxdepth 1 -mindepth 1 -type f)
+
+for script in $scripts; do
+    if [[ ! -x "$script" ]]; then
+        # Skip non-executable files
+        continue
+    fi
+
+    # If no filters are provided, run all executable scripts
+    if [[ ${#filters[@]} -eq 0 ]]; then
+        execute ./"$script"
+        continue
+    fi
+
+    # Check if the script matches any of the filters
+    match=false
+    for filter in "${filters[@]}"; do
+        if [[ "$(basename "$script")" == *"$filter"* ]]; then
+            match=true
+            break
+        fi
+    done
+
+    if [[ "$match" == false ]]; then
+        # Skip scripts that don't match the filters
+        continue
+    fi
+
+    execute ./"$script"
+done

@@ -29,17 +29,13 @@ execute() {
     "$@"
 }
 
-copy_dir(){
+copy_file(){
     from=$1
     to=$2
+    name=$(basename $from)
 
-    pushd "$from" > /dev/null
-        dirs=$(find . -mindepth 1 -maxdepth 1 -type d | sed 's|^\./||') # Remove './' prefix
-        for dir in $dirs; do
-            execute rm -rf "$to/$dir"
-            execute cp -r "$dir" "$to/$dir"
-        done
-    popd > /dev/null
+    execute rm -rf "$to/$name"
+    execute cp "$from" "$to/$name"
 }
 
 log "-------------------- dev env ------------------------"

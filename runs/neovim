@@ -1,3 +1,23 @@
 #!/usr/bin/env bash
 
-echo "hello neovim"
+
+on="v0.10.2"
+if [ ! -z $NVIM_VERSION ]; then
+    version="$NVIM_VERSION"
+fi
+
+echo "version: \"$version\""
+
+# neovim btw
+if [ ! -d $HOME/neovim ]; then
+    git clone https://github.com/neovim/neovim.git $HOME/personal/neovim
+fi
+
+git -C ~/personal/neovim fetch --all
+git -C ~/personal/neovim checkout $version
+
+make -C ~/personal/neovim clean
+make -C ~/personal/neovim CMAKE_BUILD_TYPE=RelWithDebInfo
+sudo make -C ~/personal/neovim install
+
+

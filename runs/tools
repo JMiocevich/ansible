@@ -1,6 +1,12 @@
 
 #!/usr/bin/env bash
 export HOMEBREW_NO_AUTO_UPDATE=1
+
+# Function to check if the OS is macOS
+is_macos() {
+    [[ "$OSTYPE" == "darwin"* ]]
+}
+
 # Install regular brew packages
 brew install awscli
 # brew install bat
@@ -26,23 +32,25 @@ brew install tree-sitter
 brew install turso
 brew install visidata
 
-
-brew install --cask aerospace
-brew install --cask amethyst
-brew install --cask arc
-brew install --cask bettertouchtool
-brew install --cask ghostty
-brew install --cask keepassxc
-brew install --cask numi
-brew install --cask orbstack
-brew install --cask plex-media-server
-brew install --cask qbittorrent
-brew install --cask scroll-reverser
-brew install --cask session-manager-plugin
-brew install --cask slack
-brew install --cask tad
-# brew install --cask visual-studio-code
-brew install --cask vlc
-brew install --cask zed
+# Install casks only if running on macOS
+if is_macos; then
+    brew install --cask aerospace
+    brew install --cask amethyst
+    brew install --cask arc
+    brew install --cask bettertouchtool
+    brew install --cask ghostty
+    brew install --cask keepassxc
+    brew install --cask numi
+    brew install --cask orbstack
+    brew install --cask plex-media-server
+    brew install --cask qbittorrent
+    brew install --cask scroll-reverser
+    brew install --cask session-manager-plugin
+    brew install --cask slack
+    brew install --cask tad
+    # brew install --cask visual-studio-code
+    brew install --cask vlc
+    brew install --cask zed
+fi
 
 webi jq bat rg

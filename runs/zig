@@ -1,32 +1,27 @@
-# Define the Zig repository and target folder
-REPO="git@github.com:ziglang/zig.git"
-BRANCH="0.14.0"
-TARGET_DIR="$HOME/personal/zig"
-
-# Check if the folder exists
-if [ -d "$TARGET_DIR" ]; then
-  echo "Directory $TARGET_DIR exists. Pulling latest changes from branch $BRANCH..."
-  cd "$TARGET_DIR"
-  git fetch origin
-  git checkout "$BRANCH"
-  git pull origin "$BRANCH"
-else
-  echo "Directory $TARGET_DIR does not exist. Cloning repository..."
-  git clone -b "$BRANCH" "$REPO" "$TARGET_DIR"
-fi
-
-# Build Zig
-cd "$TARGET_DIR"
-brew install llvm@20 lld@20 cmake
-brew install llvm@19
-# Add LLVM 19 to PATH
-export PATH="$(brew --prefix llvm@19)/bin:$PATH"
-
-echo 'export PATH="/Users/josephmiocevich/.local/opt/brew/opt/llvm/bin:$PATH"' >> /Users/josephmiocevich/.zshrc
-rm -rf build
-mkdir build
-cd build
-cmake .. -DZIG_STATIC_ZSTD=ON -DCMAKE_PREFIX_PATH="$(brew --prefix llvm@19);$(brew --prefix lld@20);$(brew --prefix zstd)"
-make install
-
-
+# # Define the Zig repository and target folder
+# REPO="git@github.com:ziglang/zig.git"
+# BRANCH="0.14.0"
+# TARGET_DIR="$HOME/personal/zig"
+#
+# # Check if the folder exists
+# if [ -d "$TARGET_DIR" ]; then
+#   echo "Directory $TARGET_DIR exists. Pulling latest changes from branch $BRANCH..."
+#   cd "$TARGET_DIR"
+#   git fetch origin
+#   git checkout "$BRANCH"
+#   git pull origin "$BRANCH"
+# else
+#   echo "Directory $TARGET_DIR does not exist. Cloning repository..."
+#   git clone -b "$BRANCH" "$REPO" "$TARGET_DIR"
+# fi
+#
+# # Build Zig
+# cd "$TARGET_DIR"
+# brew install llvm@19 lld@20 cmake
+# rm -rf build
+# mkdir build
+# cd build
+# cmake .. -DZIG_STATIC_ZSTD=ON -DCMAKE_PREFIX_PATH="$(brew --prefix llvm@19);$(brew --prefix lld@20);$(brew --prefix zstd)"
+# make install
+curl -sS https://webi.sh/zig | sh; \
+source ~/.config/envman/PATH.env

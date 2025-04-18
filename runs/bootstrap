@@ -1,3 +1,5 @@
-curl -sS https://webi.sh/webi | sh; \
+curl -sS https://webi.sh/brew | sh;
+curl -sS https://webi.sh/webi | sh; 
+
 source ~/.config/envman/PATH.env
 

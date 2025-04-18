@@ -160,5 +160,3 @@ gpgconf --launch gpg-agent
 source ~/.config/envman/PATH.env
 
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/joe/.lmstudio/bin"

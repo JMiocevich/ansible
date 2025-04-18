@@ -3,7 +3,7 @@
 export HOMEBREW_NO_AUTO_UPDATE=1
 # Install regular brew packages
 brew install awscli
-brew install bat
+# brew install bat
 brew install direnv
 brew install fzf
 brew install git-lfs
@@ -11,15 +11,12 @@ brew install gnupg
 brew install just
 brew install lazygit
 brew install minikube
-brew install npth
-brew install ollama
-brew install oniguruma
 brew install openssl@3
 brew install opentofu
 brew install packer
+brew install jq
 brew install powerlevel10k
-brew install ripgrep
-brew install rust
+# brew install ripgrep
 brew install sst
 brew install tflint
 brew install tldr
@@ -44,6 +41,8 @@ brew install --cask scroll-reverser
 brew install --cask session-manager-plugin
 brew install --cask slack
 brew install --cask tad
-brew install --cask visual-studio-code
+# brew install --cask visual-studio-code
 brew install --cask vlc
 brew install --cask zed
+
+webi jq bat rg

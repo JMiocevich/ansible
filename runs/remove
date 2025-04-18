@@ -3,6 +3,11 @@
 
 # Install regular brew packages
 brew uninstall ansible
+brew uninstall aws-amplify
 brew uninstall bun
 brew uninstall deno
 brew uninstall node
+brew uninstall zig
+brew uninstall rust
+brew uninstall bat
+brew uninstall ripgrep

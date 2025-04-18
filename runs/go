@@ -1,12 +1,8 @@
 
-#!/usr/bin/env bash
+#!/bin/bash
 
-# Install regular brew packages
-git clone -b 0.14.0 git@github.com:ziglang/zig.git ~/personal/zig
+curl -sS https://webi.sh/golang | sh; \
+source ~/.config/envman/PATH.env
 
-cd ~/personal/zig
-
-mkdir build
-cd build
-cmake .. -DZIG_STATIC_ZSTD=ON -DCMAKE_PREFIX_PATH="$(brew --prefix llvm@20);$(brew --prefix lld@20);$(brew --prefix zstd)"
-make install
+curl -sS https://webi.sh/go-essentials | sh; \
+source ~/.config/envman/PATH.env

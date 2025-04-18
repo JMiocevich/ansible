@@ -1,7 +1,6 @@
 
 #!/usr/bin/env bash
 
-curl -sS https://webi.sh/node | sh; \
-
-curl -sS https://webi.sh/bun | sh; \
+curl -sS https://webi.sh/node | sh; 
+curl -sS https://webi.sh/bun | sh; 
 source ~/.config/envman/PATH.env

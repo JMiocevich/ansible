@@ -1,4 +1,7 @@
 
 #!/usr/bin/env bash
 
-# Install regular brew packages
+curl -sS https://webi.sh/node | sh; \
+
+curl -sS https://webi.sh/bun | sh; \
+source ~/.config/envman/PATH.env

@@ -1,0 +1,12 @@
+
+#!/usr/bin/env bash
+
+# Install regular brew packages
+git clone -b 0.14.0 git@github.com:ziglang/zig.git ~/personal/zig
+
+cd ~/personal/zig
+
+mkdir build
+cd build
+cmake .. -DZIG_STATIC_ZSTD=ON -DCMAKE_PREFIX_PATH="$(brew --prefix llvm@20);$(brew --prefix lld@20);$(brew --prefix zstd)"
+make install

@@ -1,0 +1,11 @@
+
+#!/usr/bin/env bash
+
+# Install regular brew packages
+git clone git@github.com:ghostty-org/ghostty.git ~/personal/ghosty
+git pull
+
+cd ~/personal/ghosty
+
+# export NIXPKGS_ALLOW_UNSUPPORTED_SYSTEM=1
+# nix build --impure

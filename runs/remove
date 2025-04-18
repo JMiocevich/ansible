@@ -1,0 +1,8 @@
+
+#!/usr/bin/env bash
+
+# Install regular brew packages
+brew uninstall ansible
+brew uninstall bun
+brew uninstall deno
+brew uninstall node

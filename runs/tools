@@ -37,7 +37,7 @@ if is_macos; then
     brew install tree-sitter
     brew install turso
     brew install visidata
-
+    brew install nasm
     # Install casks
     brew install --cask aerospace
     brew install --cask amethyst

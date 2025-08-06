@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+
+# neovim btw
+if [ ! -d $HOME/personal/opencode ]; then
+    git clone git@github.com:sst/opencode.git $HOME/personal/opencode
+fi
+cd $HOME/personal/opencode
+go mod tidy 
+go build -o opencode main.go
+mv opencode /usr/local/bin
+

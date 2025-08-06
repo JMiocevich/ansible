@@ -43,24 +43,6 @@ const rules: KarabinerRules[] = [
         "key_code": ")"
       }],
     },
-    p: {
-      to: [{ key_code: "b", modifiers: ["left_control"] },
-      {
-        "key_code": "("
-      }],
-    },
-    u: {
-      to: [{ key_code: "b", modifiers: ["left_control"] },
-      {
-        "key_code": "U"
-      }],
-    },
-    d: {
-      to: [{ key_code: "b", modifiers: ["left_control"] },
-      {
-        "key_code": "D"
-      }],
-    },
 
     e: app("Arc"),
     a: app("Ghostty"),

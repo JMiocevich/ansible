@@ -89,4 +89,7 @@ elif is_linux; then
     # You may need to install GUI applications manually or via other package managers
 fi
 webi jq bat rg
+
 go install github.com/jesseduffield/lazygit@latest
+
+go install github.com/sst/opencode@latest

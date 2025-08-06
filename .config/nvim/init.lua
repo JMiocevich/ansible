@@ -275,7 +275,7 @@ require('lazy').setup({
       },
     },
   },
-
+  { 'tpope/vim-fugitive' },
   {
     'benlubas/molten-nvim',
     version = '^1.0.0', -- use version <2.0.0 to avoid breaking changes
@@ -1053,7 +1053,6 @@ vim.keymap.set('n', '<leader>w', ':Explore<CR>', { noremap = true, silent = true
 local harpoon = require 'harpoon'
 harpoon:setup {}
 
--- basic telescope configuration
 local conf = require('telescope.config').values
 local function toggle_telescope(harpoon_files)
   local file_paths = {}
@@ -1063,7 +1062,7 @@ local function toggle_telescope(harpoon_files)
 
   require('telescope.pickers')
     .new({}, {
-      prompt_title = 'Harpoon',
+      prompt_title = 'harpoon',
       finder = require('telescope.finders').new_table {
         results = file_paths,
       },
@@ -1073,10 +1072,36 @@ local function toggle_telescope(harpoon_files)
     :find()
 end
 
-vim.keymap.set('n', '<C-e>', function()
+vim.keymap.set('n', '<c-j>', function()
   toggle_telescope(harpoon:list())
-end, { desc = 'Open harpoon window' })
+end, { desc = 'open harpoon window' })
 
+vim.keymap.set('n', 'c-x,', function()
+  harpoon:list():add()
+end)
+
+-- vim.keymap.set('n', '<c-a>', function()
+--   harpoon:list():select(1)
+-- end)
+-- vim.keymap.set('n', '<c-e>', function()
+--   harpoon:list():select(1)
+-- end)
+-- vim.keymap.set('n', '<c-i>', function()
+--   harpoon:list():select(3)
+-- end)
+-- vim.keymap.set('n', '<c-c>', function()
+--   harpoon:list():select(4)
+-- end)
+
+-- toggle previous & next buffers stored within harpoon list
+vim.keymap.set('n', '<c-a>', function()
+  harpoon:list():prev()
+end)
+vim.keymap.set('n', '<c-e>', function()
+  harpoon:list():next()
+end)
+
+--molten stuff
 vim.keymap.set('n', '<localleader>mi', ':MoltenInit<CR>', { silent = true, desc = 'Initialize the plugin' })
 vim.keymap.set('n', '<localleader>e', ':MoltenEvaluateOperator<CR>', { silent = true, desc = 'run operator selection' })
 vim.keymap.set('n', '<localleader>rl', ':MoltenEvaluateLine<CR>', { silent = true, desc = 'evaluate line' })

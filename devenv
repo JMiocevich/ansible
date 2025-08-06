@@ -54,5 +54,6 @@ copy_file(){
 log "-------------------- dev env ------------------------"
 
 copy_dir .config "$HOME/.config"
+copy_dir .tmux "$HOME/.tmux"
 copy_file .tmux.conf "$HOME"
 copy_file .zshrc "$HOME"

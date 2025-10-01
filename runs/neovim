@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-on="v0.10.2"
+on="v0.11.3"
 if [ ! -z $NVIM_VERSION ]; then
     version="$NVIM_VERSION"
 fi
